@@ -163,7 +163,7 @@ export default function SingleBlogPostPage({ data }) {
 }
 
 // This needs to be dynamic based on the slug passed in via context in gatsby-node.js
-const query = graphql`
+export const query = graphql`
   query($slug: String!) {
     blogPost: sanityPost(slug: { current: { eq: $slug } }) {
       id
