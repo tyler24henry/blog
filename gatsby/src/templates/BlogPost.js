@@ -100,7 +100,10 @@ const StyledBlogPost = styled.div`
 // TODO
 // incorporate image
 
-export default function SingleBlogPostPage({ data: { blogPost } }) {
+export default function SingleBlogPostPage({ data }) {
+    console.log(data);
+    const blogPost = data ? data.blogPost : null;
+    if(!blogPost) return <p>Blog post didn't make it 😞</p>
     const createdAt = dayMonthCommaYear(blogPost._createdAt);
     const url = blogPost && `www.tylerhenry.blog/post/${blogPost.slug.current}`;
     const title = blogPost && `${blogPost.title} by Tyler Henry`;
