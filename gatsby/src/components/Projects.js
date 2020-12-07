@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { IoAmericanFootball } from 'react-icons/io5';
+import { GiSpiderWeb } from 'react-icons/gi';
+import { BiShocked } from 'react-icons/bi';
 
 const StyledProjects = styled.div`
     .header {
@@ -12,21 +15,15 @@ const StyledProjects = styled.div`
         font-size: 1.4rem;
         line-height: 1.5;
         .link {
-            display: grid;
-            grid-template-columns: auto 1fr;
+            display: flex;
             grid-gap: 1rem;
             align-items: center;
-            img {
-                width: 35px;
-            }
         }
         .sentence {
             margin-top: 1.5rem;
         }
-        #bold-underline {
-            margin-top: 1rem;
-            text-decoration: underline;
-            font-weight: 600;
+        #shocked {
+            margin-bottom: -0.15rem;
         }
     }
 `;
@@ -37,23 +34,17 @@ export const Projects = () => {
             <p className="header">Projects</p>
             <div className="project">
                 <div className="link">
-                    <img src="https://res.cloudinary.com/tyler24henry/image/upload/v1601396244/footballicon_oi5vem.png" alt="Football" />
+                    <IoAmericanFootball />
                     <a href="http://www.bulldogsandfriends.com" target="_blank">Fantasy football website</a>
                 </div>
-                <p className="sentence">Problem: ESPN Fantasy Football API doesn’t preserve all of its data from past weeks/seasons, making it impossible to see how a league developed week-by-week.</p>
-                <p className="sentence">Solution: Create own API using the raw box scores that ESPN preserves in order to recreate “snapshots” of past weeks/seasons.</p>
-                <p className="sentence">Using the box scores, I was able to piece together each respective team’s record and stats at any given point in the league’s history - kind of like a more in depth timeline with a narrative feel.</p>
-                <p className="sentence" id="bold-underline">Each week the league has played has...</p>
-                <p>&bull; Box scores</p>
-                <p>&bull; Scoreboard</p>
-                <p>&bull; Standings</p>
-                <p>&bull; Power rankings with custom blurbs</p>
-                <p>&bull; Superlative style weekly comparisons of each team (highest scoring teams that week, .)</p>
-                <p id="bold-underline">And more...</p>
-                <p>&bull; League records (overall highest scoring franchise, etc.)</p>
-                <p>&bull; History of each franchise (owners, stats, schedule, box scores, etc.)</p>
-                <p>&bull; League members can create blog posts & polls</p>
-                <p>&bull; Discord-esque chat functionality</p>
+                <p className="sentence">I made a fantasy football website for one of the leagues that I'm in.  Nobody uses it, nobody acknowledges it, and quite honestly, it's a piece of garbage so I don't blame them, although I am a little resentful at their lack of tact when dealing with a fragile human being (me).  So don't get your hopes up, but it actually took me a lot of time to put together.  Ok, back to being resentful at imaginary things.</p>
+            </div>
+            <div className="project">
+                <div className="link">
+                    <GiSpiderWeb />
+                    <a href="http://www.tylerhenry.io" target="_blank">Web developer portfolio</a>
+                </div>
+                <p className="sentence">My shabby portfolio which consists of the aforementioned fantasy football website and not much else.  If you think that project was bad, you should have seen what came before it <BiShocked id="shocked" /></p>
             </div>
         </StyledProjects>
     )

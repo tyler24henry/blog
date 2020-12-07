@@ -1,24 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
+import { StyledRightNavHeader } from '../styles/RightNavStyles';
+import { FiTwitter, FiInstagram, FiFacebook, FiGithub } from 'react-icons/fi';
+import { ImReddit } from 'react-icons/im';
+import { FaGoodreadsG } from 'react-icons/fa';
 
 const StyledConnect = styled.div`
-    #header {
-        padding: 0.5rem 0;
-        border-bottom: 1px solid var(--grey);
-        color: var(--black);
-        font-size: 1.6rem;
-        font-weight: 600;
-        margin-bottom: 0.2rem;
-    }
     .icons {
         margin-top: 1rem;
-        display: grid;
-        grid-template-columns: auto auto 1fr;
-        grid-gap: 0.4rem;
-        img {
-            width: 24px;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        font-size: 2rem;
+        #facebook {
+            margin-right: 0.1rem;
+        }
+        #github {
+            margin-left: 0.4rem;
+            margin-right: 0.3rem;
+        }
+        #goodreads {
+             margin-left: 0.2rem;
+            font-size: 1.8rem;
+        }
+        a {
+            transition: all 0.4s;
             &:hover {
-                transform: scale(1.05);
+                transform: translateY(-4px);
             }
         }
     }
@@ -27,11 +35,14 @@ const StyledConnect = styled.div`
 export const Connect = () => {
     return (
         <StyledConnect>
-            <p id="header">Connect</p>
+            <StyledRightNavHeader>Connect</StyledRightNavHeader>
             <div className="icons">
-                <a href="https://www.twitter.com/ty24henry" target="_blank"><img src="https://res.cloudinary.com/tyler24henry/image/upload/v1592326411/twitter_cc1nyd.png" alt="Twitter icon" /></a>
-                <a href="https://www.instagram.com/tyler24henry" target="_blank"><img src="https://res.cloudinary.com/tyler24henry/image/upload/v1592485830/instagramcircular_xip8ey.png" alt="Instagram icon" /></a>
-                <a href="https://www.facebook.com/tyler24henry" target="_blank"><img src="https://res.cloudinary.com/tyler24henry/image/upload/v1592326411/facebook_hojc97.png" alt="Facebook icon" /></a>
+                <a href="https://www.twitter.com/ty24henry" target="_blank"><FiTwitter /></a>
+                <a href="https://www.facebook.com/tyler24henry" target="_blank"><FiFacebook id="facebook" /></a>
+                <a href="https://www.instagram.com/tyler24henry" target="_blank"><FiInstagram /></a>
+                <a href="https://www.github.com/tyler24henry" target="_blank"><FiGithub id="github" /></a>
+                <a href="https://www.reddit.com/user/tyler24henry/" target="_blank"><ImReddit /></a>
+                <a href="https://www.goodreads.com/tyler24henry" target="_blank"><FaGoodreadsG id="goodreads" /></a>
             </div>
         </StyledConnect>
     )

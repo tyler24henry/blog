@@ -22,12 +22,24 @@ export default {
             },
         },
         {
+            name: 'categories',
+            title: 'Categories',
+            type: 'array',
+            of: [{ type: 'reference', to: [{ type: 'category' }] }],
+        },
+        {
             name: 'image',
             title: 'Image',
             type: 'image',
             options: {
                 hotspot: true,
             }
+        },
+        {
+            name: 'imageSubtitle',
+            title: 'Image subtitle',
+            type: 'string',
+            description: 'Text that goes under image',
         },
         {
             name: 'summary',
@@ -46,11 +58,16 @@ export default {
         select: {
             title: 'title',
             media: 'image',
+            category0: 'categories.0.name',
+            category1: 'categories.1.name',
+            category2: 'categories.2.name',
         },
-        prepare: ({ title, image }) => {
+        prepare: ({ title, media, ...categories }) => {
+            const cats = Object.values(categories).filter(Boolean);
             return {
                 title,
-                image,
+                media,
+                subtitle: cats.join(', '),
             };
         },
     },

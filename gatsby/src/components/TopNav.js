@@ -4,7 +4,7 @@ import { Link } from 'gatsby';
 
 const StyledTopNav = styled.div`
     margin-top: 2rem;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
     display: grid;
     grid-template-columns: auto auto 1fr;
     grid-gap: 2rem;
@@ -15,6 +15,7 @@ const StyledTopNav = styled.div`
         font-weight: 500;
         text-transform: uppercase;
         text-decoration: none;
+        transition: all 0.3s;
         &:hover {
             text-decoration: underline;
             text-decoration-color: var(--red);

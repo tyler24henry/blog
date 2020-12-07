@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
+import { AiOutlineCalendar, AiOutlineTags } from 'react-icons/ai';
+import { IoMdArrowDropright } from 'react-icons/io';
+import { FaBookReader } from 'react-icons/fa';
 
 import { dayMonthCommaYear } from '../utils/dateHelpers';
 
@@ -15,18 +18,52 @@ const StyledBlogPosts = styled.div`
             font-weight: 700;
             color: var(--black);
             text-decoration: none;
+            transition: all 0.3s;
             &:hover {
                 text-decoration: underline;
                 text-decoration-color: var(--red);
             }
         }
-        .date {
-            margin-top: 0.5rem;
-            padding: 0.5rem 0.2rem;
-            font-size: 1.6rem;
+        .date-tags-wrapper {
             background: var(--snow);
-            span {
-                padding-right: 1rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem 0.4rem 0.5rem 0.2rem;
+            font-size: 1.4rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1rem;
+            align-items: center;
+            .date {
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 0.7rem;
+                align-items: center;
+                #icon {
+                    font-size: 1.8rem;
+                }
+            }
+            .tags {
+                font-size: 1.4rem;
+                justify-self: end;
+                display: flex;
+                align-items: center;
+                a {
+                    display: flex;
+                    align-items: center;
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    text-decoration: none;
+                    transition: all 0.3s;
+                    &:hover {
+                        text-decoration: underline;
+                        text-decoration-color: var(--red);
+                    }
+                }
+            }
+            #tag-icon {
+                font-size: 1.8rem;
+                margin-right: 0.5rem;
             }
         }
         .content {
@@ -36,16 +73,20 @@ const StyledBlogPosts = styled.div`
             white-space: pre-wrap;
         }
         .post-footer {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1rem;
+            align-items: center;
             margin-top: 1.5rem;
             background: #f5f5f5;
             padding: 0.8rem 1rem;
-            span {
-                padding-right: 1rem;
-                font-size: 1.3rem;
+            #book {
+                font-size: 1.5rem;
             }
             a {
                 font-size: 1.5rem;
                 text-decoration: none;
+                transition: all 0.3s;
                 &:hover {
                     text-decoration: underline;
                     text-decoration-color: var(--red);
@@ -56,11 +97,6 @@ const StyledBlogPosts = styled.div`
 `;
 
 export const BlogPosts = ({ blogPosts }) => {
-
-    // TODO: summary
-    // create pages for each blog post
-    // click title to link to blog post
-
     return (
         <StyledBlogPosts>
             {blogPosts.map(post => {
@@ -68,10 +104,15 @@ export const BlogPosts = ({ blogPosts }) => {
                 return (
                     <div className="post" key={post.id}>
                         <Link className="title" to={`/post/${post.slug.current}`}>{post.title}</Link>
-                        <p className="date"><span>📅</span> {createdAt}</p>
+                        <div className="date-tags-wrapper">
+                            <div className="date">
+                                <AiOutlineCalendar id="icon" /> {createdAt}
+                            </div>
+                            <p className="tags"><AiOutlineTags id="tag-icon" /> {post.categories.map((category, index) => <Link to={`/category/${category.slug.current}`}>{index > 0 && <IoMdArrowDropright />}{category.name}</Link>)}</p>
+                        </div>
                         <p className="content">{post.summary}</p>
                         <div className="post-footer">
-                            <span>📚</span>
+                            <FaBookReader id="book" />
                             <Link to={`/post/${post.slug.current}`}>Read more...</Link>
                         </div>
                     </div>
