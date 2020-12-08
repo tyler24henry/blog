@@ -14,12 +14,6 @@ const StyledTopNav = styled.div`
         font-size: 1.2rem;
         font-weight: 500;
         text-transform: uppercase;
-        text-decoration: none;
-        transition: all 0.3s;
-        &:hover {
-            text-decoration: underline;
-            text-decoration-color: var(--red);
-        }
     }
 `;
 

@@ -38,29 +38,6 @@ const StyledBlogPost = styled.div`
                     font-size: 1.8rem;
                 }
             }
-            .tags {
-                font-size: 1.4rem;
-                justify-self: end;
-                display: flex;
-                align-items: center;
-                a {
-                    display: flex;
-                    align-items: center;
-                    font-size: 1.2rem;
-                    font-weight: 500;
-                    text-transform: uppercase;
-                    text-decoration: none;
-                    transition: all 0.3s;
-                    &:hover {
-                        text-decoration: underline;
-                        text-decoration-color: var(--red);
-                    }
-                }
-            }
-            #tag-icon {
-                font-size: 1.8rem;
-                margin-right: 0.5rem;
-            }
         }
         .image-wrapper {
             margin: 1rem 0 5rem 0;
@@ -77,6 +54,7 @@ const StyledBlogPost = styled.div`
         }
         .share-post-container {
             margin-top: 3rem;
+            padding: 0 0.3rem;
             .border-top {
                 width: 150px;
                 height: 1px;
@@ -113,6 +91,48 @@ const StyledBlogPost = styled.div`
                 }
             }
         }
+        .tags {
+            font-size: 1.4rem;
+            justify-self: end;
+            display: flex;
+            align-items: center;
+            a {
+                display: flex;
+                align-items: center;
+                font-size: 1.2rem;
+                font-weight: 500;
+                text-transform: uppercase;
+                text-decoration: none;
+                transition: all 0.3s;
+                &:hover {
+                    text-decoration: underline;
+                    text-decoration-color: var(--red);
+                }
+            }
+            span {
+                text-transform: uppercase;
+                font-size: 1.2rem;
+                font-weight: 600;
+                padding-right: 0.5rem;
+            }
+        }
+        #tags-header {
+            @media(max-width: 700px){
+                position: absolute;
+                left: -9999px;
+                opacity: 0;
+                display: none;
+            }
+        }
+        #tag-icon {
+            font-size: 1.8rem;
+            margin-right: 0.5rem;
+        }
+        .tags-footer {
+            background: #f5f5f5;
+            padding: 1.5rem 0.3rem;
+            margin-top: 1rem;
+        }
     }
 `;
 
@@ -135,7 +155,7 @@ export default function SingleBlogPostPage({ data }) {
                     <div className="date">
                         <AiOutlineCalendar id="icon" /> {createdAt}
                     </div>
-                    <p className="tags"><AiOutlineTags id="tag-icon" /> {blogPost.categories.map((category, index) => <Link to={`/category/${category.slug.current}`}>{index > 0 && <IoMdArrowDropright />}{category.name}</Link>)}</p>
+                    <p className="tags" id="tags-header"><AiOutlineTags id="tag-icon" /> {blogPost.categories.map((category, index) => <Link to={`/category/${category.slug.current}`}>{index > 0 && <IoMdArrowDropright />}{category.name}</Link>)}</p>
                 </div>
                 <div className="image-wrapper">
                     <Img fluid={blogPost.image.asset.fluid} alt={blogPost.title} />
@@ -182,6 +202,9 @@ export default function SingleBlogPostPage({ data }) {
                             <FiPocket id="pocket" />
                         </PocketShareButton>
                     </div>
+                </div>
+                <div className="tags-footer">
+                    <p id="tags-footer" className="tags"><span>Tags</span> <AiOutlineTags id="tag-icon" /> {blogPost.categories.map((category, index) => <Link to={`/category/${category.slug.current}`}>{index > 0 && <IoMdArrowDropright />}{category.name}</Link>)}</p>
                 </div>
             </div>
         </StyledBlogPost>

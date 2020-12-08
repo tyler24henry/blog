@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import bubble from '../assets/images/double-bubble-outline.png';
 
 const GlobalStyles = createGlobalStyle`
   :root {

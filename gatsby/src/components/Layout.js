@@ -18,6 +18,14 @@ const ContentStyles = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
   gap: 4rem;
+  a {
+    text-decoration: none;
+    transition: all 0.4s;
+    &:hover {
+        text-decoration: underline;
+        text-decoration-color: var(--red);
+    }
+  }
 `;
 
 const BodyStyles = styled.div`

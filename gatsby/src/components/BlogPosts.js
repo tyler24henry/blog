@@ -47,6 +47,12 @@ const StyledBlogPosts = styled.div`
                 justify-self: end;
                 display: flex;
                 align-items: center;
+                @media(max-width: 700px){
+                    position: absolute;
+                    left: -9999px;
+                    opacity: 0;
+                    display: none;
+                }
                 a {
                     display: flex;
                     align-items: center;
@@ -85,12 +91,6 @@ const StyledBlogPosts = styled.div`
             }
             a {
                 font-size: 1.5rem;
-                text-decoration: none;
-                transition: all 0.3s;
-                &:hover {
-                    text-decoration: underline;
-                    text-decoration-color: var(--red);
-                }
             }
         }
     }
