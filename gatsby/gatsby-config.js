@@ -30,5 +30,13 @@ export default {
           trackingId: 'UA-142485528-7',
         },
       },
+      {
+        resolve: `gatsby-plugin-hotjar`,
+        options: {
+          includeInDevelopment: true, // optional parameter to include script in development
+          id: 2159035,
+          sv: 6,
+        },
+      },
     ],
   };

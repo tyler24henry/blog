@@ -1,12 +1,8 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import { hotjar } from 'react-hotjar';
-
 import { BlogPosts } from '../components/BlogPosts';
 import SEO from '../components/SEO';
-
-hotjar.initialize(process.env.GATSBY_HOTJAR_ID, 6);
 
 export default function HomePage({ data }) {
     const blogPosts = data.blogPosts.nodes;
