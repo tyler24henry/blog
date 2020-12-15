@@ -6,11 +6,12 @@ import schemaTypes from 'all:part:@sanity/base/schema-type';
 
 import post from './post';
 import category from './category';
+import project from './project';
 
 export default createSchema({
   // We name our schema
   name: 'default',
   // Then proceed to concatenate our document type
   // to the ones provided by any plugins that are installed
-  types: schemaTypes.concat([post, category]),
+  types: schemaTypes.concat([post, category, project]),
 });

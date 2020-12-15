@@ -11,7 +11,7 @@ const StyledConnect = styled.div`
         display: flex;
         gap: 0.5rem;
         align-items: center;
-        font-size: 2rem;
+        font-size: 1.5rem;
         #facebook {
             margin-right: 0.1rem;
         }
@@ -21,13 +21,7 @@ const StyledConnect = styled.div`
         }
         #goodreads {
              margin-left: 0.2rem;
-            font-size: 1.8rem;
-        }
-        a {
-            transition: all 0.4s;
-            &:hover {
-                transform: translateY(-4px);
-            }
+            font-size: 1.3rem;
         }
     }
 `;

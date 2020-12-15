@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { graphql, Link, useStaticQuery } from 'gatsby';
-import { FaRegHandPointRight } from 'react-icons/fa';
+import { BiCaretRight } from 'react-icons/bi';
 
 import { StyledRightNavHeader } from '../styles/RightNavStyles';
 
@@ -12,7 +12,7 @@ const CategoriesNavStyled = styled.div`
         .item-wrapper {
             display: grid;
             grid-template-columns: auto 1fr;
-            grid-gap: 1rem;
+            grid-gap: 0.3rem;
             align-items: center;
             padding: 0.8rem 0.2rem;
             img {
@@ -49,7 +49,7 @@ export const CategoriesNav = () => {
                 {categories.nodes.map(category => {
                     return (
                         <div className="item-wrapper" key={category.id}>
-                            <FaRegHandPointRight />
+                            <BiCaretRight />
                             <Link to={`/category/${category.slug.current}`}>{category.name}</Link>
                         </div>
                     )

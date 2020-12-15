@@ -17,13 +17,17 @@ const StyledAbout = styled.div`
             color: ${props => props.theme.black};
         }
     }
+    a {
+        font-weight: 600;
+    }
 `;
 
 export const About = () => {
     return (
         <StyledAbout>
             <p className="header">About</p>
-            <p className="content">Hello. Hi. Hello again. My name is Tyler Henry and it's December 2020. What a time to start a blog. Wonder how many blogs started during the pandemic. All of us out here in the www just giving it the old college try. Probably because most of us went to college but couldn't really figure it out from there so we needed to do this as a kind of side hobby or we're just trying to "find outselves maaaaan."  That's pretty much me. Would be crazy if I "found myself" on the internet. That would be a weird place for "myself" to hide.</p>
+            <p className="content">Hello!  My name is Tyler Henry and I’m probably not as enthusiastic as that exclamation mark might imply.  Which leads me to my next point.  I am an INTROVERT.  Born and raised about an hour northeast of Philadelphia, Pennsyltucky.  So I do #TrustTheProcess and am lucky enough to attend every Sixers home game (I do live stats for a company based in Europe, kind of a sweet gig).  I should probably post about that more but I try not to brag.  I’m also in the process of becoming a web developer.  Made this website myself along with a few others I have listed on the <Link to="/projects">projects</Link> page.</p>
+            <p className="content">I’m interested in movies, comedy, sports, and by god I hope to discover a few other things in the process of writing posts for this blog.  I hope you find something that interests you.  Thanks for coming to this corner of the internet.</p>
         </StyledAbout>
     )
 }

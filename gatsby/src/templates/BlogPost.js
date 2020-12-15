@@ -74,10 +74,6 @@ const StyledBlogPost = styled.div`
                 font-size: 2rem;
                 button {
                     box-shadow: none;
-                    transition: all 0.3s;
-                    &:hover {
-                        transform: translateY(-4px);
-                    }
                 }
                 #twitter {
                     font-size: 1.7rem;
