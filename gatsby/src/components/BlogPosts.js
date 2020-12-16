@@ -4,6 +4,7 @@ import { Link } from 'gatsby';
 import { AiOutlineCalendar, AiOutlineTags } from 'react-icons/ai';
 import { IoMdArrowDropright } from 'react-icons/io';
 import { FaBookReader } from 'react-icons/fa';
+import { CommentCount } from 'gatsby-plugin-disqus';
 
 import { dayMonthCommaYear } from '../utils/dateHelpers';
 
@@ -80,7 +81,7 @@ const StyledBlogPosts = styled.div`
         }
         .post-footer {
             display: grid;
-            grid-template-columns: auto 1fr;
+            grid-template-columns: auto 1fr auto;
             gap: 1rem;
             align-items: center;
             margin-top: 1.5rem;
@@ -92,6 +93,11 @@ const StyledBlogPosts = styled.div`
             a {
                 font-size: 1.5rem;
             }
+            #number-comments {
+                justify-self: end;
+                font-size: 1.4rem;
+                font-weight: 500;
+            }
         }
     }
 `;
@@ -101,6 +107,11 @@ export const BlogPosts = ({ blogPosts }) => {
         <StyledBlogPosts>
             {blogPosts.map(post => {
                 const createdAt = dayMonthCommaYear(post._createdAt);
+                let disqusConfig = {
+                    url: `https://www.tylerhenry.blog/${post.slug.current}`,
+                    identifier: post.id,
+                    title: post.title,
+                }
                 return (
                     <div className="post" key={post.id}>
                         <Link className="title" to={`/post/${post.slug.current}`}>{post.title}</Link>
@@ -113,7 +124,8 @@ export const BlogPosts = ({ blogPosts }) => {
                         <p className="content">{post.summary}</p>
                         <div className="post-footer">
                             <FaBookReader id="book" />
-                            <Link to={`/post/${post.slug.current}`}>Read more...</Link>
+                            <Link id="read-more" to={`/post/${post.slug.current}`}>Read more...</Link>
+                            <Link id="number-comments" to={`/post/${post.slug.current}`}><CommentCount config={disqusConfig} placeholder={'0 Comments'} /></Link>
                         </div>
                     </div>
                 )

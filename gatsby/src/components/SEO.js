@@ -9,8 +9,7 @@ export default function SEO({ children, location }) {
       <html lang="en" />
       <title>{title}</title>
       {/* Fav Icons */}
-      <link rel="icon" href="/favicon.png" />
-      <link rel="alternate icon" href="/favicon.ico" />
+      <link rel="icon" href="/lightningbolt.png" />
       {/* Meta Tags */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta charSet="utf-8" />

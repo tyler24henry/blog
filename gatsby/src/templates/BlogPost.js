@@ -10,6 +10,7 @@ import SEO from '../components/SEO';
 import { dayMonthCommaYear } from '../utils/dateHelpers';
 import { AiOutlineCalendar, AiOutlineTags } from 'react-icons/ai';
 import { IoMdArrowDropright } from 'react-icons/io';
+import { Disqus } from 'gatsby-plugin-disqus';
 
 const StyledBlogPost = styled.div`
     .post {
@@ -108,7 +109,7 @@ const StyledBlogPost = styled.div`
             span {
                 text-transform: uppercase;
                 font-size: 1.2rem;
-                font-weight: 600;
+                font-weight: 500;
                 padding-right: 0.5rem;
             }
         }
@@ -126,8 +127,8 @@ const StyledBlogPost = styled.div`
         }
         .tags-footer {
             background: #f5f5f5;
-            padding: 1.5rem 0.3rem;
-            margin-top: 1rem;
+            padding: 0.8rem 0.5rem;
+            margin: 1rem 0 0.5rem 0;
         }
     }
 `;
@@ -141,6 +142,13 @@ export default function SingleBlogPostPage({ data }) {
     const createdAt = dayMonthCommaYear(blogPost._createdAt);
     const url = `www.tylerhenry.blog/post/${blogPost.slug.current}`;
     const title = `${blogPost.title} by Tyler Henry`;
+
+    let disqusConfig = {
+        url: `https://www.tylerhenry.blog/${blogPost.slug.current}`,
+        identifier: blogPost.id,
+        title: blogPost.title,
+    }
+
   return (
     <>
         <SEO title={blogPost.title} image={blogPost.image?.asset?.fluid?.src} />
@@ -202,6 +210,7 @@ export default function SingleBlogPostPage({ data }) {
                 <div className="tags-footer">
                     <p id="tags-footer" className="tags"><span>Tags</span> <AiOutlineTags id="tag-icon" /> {blogPost.categories.map((category, index) => <Link to={`/category/${category.slug.current}`}>{index > 0 && <IoMdArrowDropright />}{category.name}</Link>)}</p>
                 </div>
+                <Disqus config={disqusConfig} />
             </div>
         </StyledBlogPost>
     </>

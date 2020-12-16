@@ -6,9 +6,9 @@ export default {
     pathPrefix: '/blog',
     siteMetadata: {
       title: `Tyler Henry`,
-      siteUrl: 'http://www.tylerhenry.blog',
+      siteUrl: 'https://www.tylerhenry.blog',
       description: `Blog written by the great Tyler Henry.  Just kidding.  He's really, really dumb.`,
-      image: '/favicon.png',
+      image: '/lightningbolt.png',
       twitter: '@ty24henry',
     },
     plugins: [
@@ -37,6 +37,12 @@ export default {
           id: 2159035,
           sv: 6,
         },
+      },
+      {
+        resolve: `gatsby-plugin-disqus`,
+        options: {
+          shortname: `tyler-henry`
+        }
       },
     ],
   };
