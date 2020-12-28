@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { GiSpiderWeb } from 'react-icons/gi';
 import { FaRegLaugh } from 'react-icons/fa';
+import { SiAwesomelists } from 'react-icons/si';
 
 const StyledProjects = styled.div`
     .header {
@@ -40,6 +41,9 @@ export const Projects = ({ projects }) => {
                             )}
                             {project.id === "-dd3001f9-b6a4-597b-86dd-8f8813e1a81e" && (
                                 <FaRegLaugh />
+                            )}
+                            {project.id === "-12ad0463-3c64-5534-b1d2-1ee0b892a3d6" && (
+                                <SiAwesomelists />
                             )}
                             <a href={project.url} target="_blank">{project.title}</a>
                         </div>
