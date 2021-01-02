@@ -15,6 +15,10 @@ export const StyledContentGrid = styled.div`
         grid-template-columns: 1fr;
         grid-row-gap: 5rem;
     }
+    @media(max-width: 414px){
+        width: 90vw;
+        margin: 2rem auto 1rem auto;
+    }
     .item-wrapper {
         color: var(--black);
         display: grid;
@@ -47,6 +51,9 @@ export const StyledContentGrid = styled.div`
             font-size: 1.4rem;
             line-height: 1.5;
             white-space: pre-wrap;
+            @media(max-width: 414px){
+                margin-top: -1rem;
+            }
         }
     }
 `;

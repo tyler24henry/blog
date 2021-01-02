@@ -4,7 +4,10 @@ import { StyledContentGrid } from './BlogPosts';
 import Img from 'gatsby-image';
 
 const StyledProjects = styled.div`
-
+    @media(max-width: 414px){
+        width: 90vw;
+        margin: 2rem auto 1rem auto;
+    }
 `;
 
 export const Websites = ({ projects }) => {

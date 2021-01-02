@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import { OffsetImageStyles } from '../templates/BlogPost';
 
 const StyledFavorites = styled.div`
+    @media(max-width: 414px){
+        width: 90vw;
+        margin: 3rem auto 1rem auto;
+    }
     #quote {
         width: 90%;
         margin: 0 auto;
@@ -17,12 +21,18 @@ const StyledFavorites = styled.div`
         @media(max-width: 700px){
             margin-top: 5rem;
         } 
+        @media(max-width: 414px){
+            width: 95%;
+        }
         h1 {
             margin-top: 7.5rem;
             font-size: 5rem;
             font-weight: 600;
             @media(max-width: 700px){
                 font-size: 4rem;
+            }
+            @media(max-width: 414px){
+                font-size: 3.2rem;
             }
         }
         h3 {

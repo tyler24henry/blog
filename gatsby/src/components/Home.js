@@ -5,8 +5,16 @@ import { BlogPosts } from './BlogPosts';
 import { Websites } from './Websites';
 
 const HomeStyles = styled.div`
+    @media(max-width: 414px){
+        width: 90vw;
+        margin: 0 auto;
+        margin-top: 6rem;
+    }
     .image-intro-wrapper {
         min-height: calc(100vh - 20rem);
+        @media(max-width: 414px){
+            min-height: calc(100vh - 25rem);
+        }
     }
     .image-wrapper {
         position: relative;
@@ -21,6 +29,10 @@ const HomeStyles = styled.div`
             max-width: 600px;
             background: none;
             margin: 0 auto;
+        }
+        @media(max-width: 414px){
+            max-width: calc(100vw - 5.5rem);
+            margin: 0;
         }
         .offset-image-wrapper {
             background: var(--blue);
@@ -38,6 +50,10 @@ const HomeStyles = styled.div`
             @media(max-width: 700px){
                 width: 350px;
                 height: 290px;
+            }
+            @media(max-width: 414px){
+                width: 70vw;
+                height: 55vw;
             }
         }
     }
@@ -66,6 +82,9 @@ const HomeStyles = styled.div`
             @media(max-width: 700px){
                 font-size: 4rem;
             }
+            @media(max-width: 414px){
+                font-size: 3.2rem;
+            }
         }
         h3 {
             margin-top: 2rem;
@@ -83,13 +102,20 @@ const HomeStyles = styled.div`
     .learn-more-wrapper {
         margin-top: 2rem;
         display: flex;
-        grid-gap: 1.5rem;
+        flex-wrap: wrap;
         align-items: center;
+        @media(max-width: 414px){
+            display: grid;
+            grid-template-columns: 1fr;
+            justify-items: center;
+            grid-gap: 2rem;
+        }
         p, a {
             font-size: 1.8rem;
             line-height: 1.5;
         }
         a {
+            margin-left: 1.5rem;
             background: var(--blue);
             padding: 0.5rem 1rem;
             color: white;

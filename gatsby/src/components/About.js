@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import { Link } from 'gatsby';
 
 const StyledAbout = styled.div`
+    @media(max-width: 414px){
+        margin: 0 auto;
+        margin-top: 2rem;
+    }
     .image-intro-wrapper {
         display: grid;
         grid-template-columns: 1fr auto;
@@ -27,6 +31,9 @@ const StyledAbout = styled.div`
             @media(max-width: 700px){
                 font-size: 4rem;
             } 
+            @media(max-width: 414px){
+                font-size: 3.2rem;
+            }
         }
         h3 {
             margin-top: 2rem;

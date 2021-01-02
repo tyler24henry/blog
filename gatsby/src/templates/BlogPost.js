@@ -10,11 +10,20 @@ export const OffsetImageStyles = styled.div`
     width: 95%;
     margin: 1.5rem 1.5rem 0 auto;
     background: var(--blue);
+    @media(max-width: 414px){
+        width: 100%;
+        margin: 1.5rem auto 0 auto;
+    }
     .offset-image {
         transform: translateY(-1.25rem) translateX(1.5rem);
         height: 400px;
         width: 100%;
         object-fit: cover;
+        @media(max-width: 414px){
+            height: 200px;
+            width: 100vw;
+            transform: translateY(-1.25rem) translateX(0);
+        }
     }
 `;
 
@@ -22,7 +31,7 @@ const StyledBlogPost = styled.div`
     .post {
         position: relative;
         color: var(--black);
-        .title-category-wrapper {
+        .title-category-outer-wrapper {
             position: absolute;
             left: 0;
             bottom: -35px;
@@ -31,17 +40,32 @@ const StyledBlogPost = styled.div`
             z-index: 2;
             background: white;
             color: var(--blue);
-            h1 {
-                margin-top: 1rem;
-                font-size: 3rem;
-                font-weight: 600;
-                letter-spacing: 0.5px;
+            @media(max-width: 414px){
+                position: relative;
+                left: auto;
+                bottom: auto;
+                padding: 2rem 0;
+                width: 100%;
             }
-            h3 {
-                font-size: 1.5rem;
-                font-weight: 500;
-                text-transform: uppercase;
-                letter-spacing: 1px;
+            .title-category-inner-wrapper {
+                @media(max-width: 414px){
+                    margin-left: 5%;
+                }
+                h1 {
+                    margin-top: 1rem;
+                    font-size: 3rem;
+                    font-weight: 600;
+                    letter-spacing: 0.5px;
+                    @media(max-width: 414px){
+                        font-size: 2.6rem;
+                    }
+                }
+                h3 {
+                    font-size: 1.5rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
             }
         }
         .essay-wrapper {
@@ -52,6 +76,10 @@ const StyledBlogPost = styled.div`
             display: grid;
             grid-template-columns: 1fr;
             grid-gap: 3rem;
+            @media(max-width: 414px){
+                margin-top: 4rem;
+                width: 90%;
+            }
             .content-wrapper {
                 font-size: 1.8rem;
                 line-height: 1.5;
@@ -139,9 +167,11 @@ export default function SingleBlogPostPage({ data }) {
             <div className="post">
                 <OffsetImageStyles>
                     <Img className="offset-image" fluid={blogPost.image.asset.fluid} alt={blogPost.title} />
-                    <div className="title-category-wrapper">
-                        <h3>{category.name}</h3>
-                        <h1>{blogPost.title}</h1>
+                    <div className="title-category-outer-wrapper">
+                        <div className="title-category-inner-wrapper">
+                            <h3>{category.name}</h3>
+                            <h1>{blogPost.title}</h1>
+                        </div>
                     </div>
                 </OffsetImageStyles>
                 <div className="essay-wrapper">

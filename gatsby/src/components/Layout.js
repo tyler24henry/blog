@@ -15,6 +15,9 @@ const ContentStyles = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-gap: 6rem;
+  @media(max-width: 414px){
+      grid-gap: 0;
+  }
   a {
     text-decoration: none;
     transition: all 0.2s;
@@ -30,6 +33,9 @@ const BodyStyles = styled.div`
   @media(max-width: 700px){
     width: 90vw;
   }
+  @media(max-width: 414px){
+      width: 100vw;
+    }
 `;
 
 export default function Layout({ children }) {

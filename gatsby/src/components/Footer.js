@@ -12,14 +12,20 @@ const FooterStyles = styled.footer`
     gap: 0.5rem;
     font-size: 1.5rem;
     background: #eeecf5;
+    @media(max-width: 414px){
+        padding: 2rem 0;
+    }
     .socials {
         font-size: 2rem;
         display: flex;
-        gap: 2rem;
         align-items: center;
         a {
+            margin-left: 2rem;
             color: var(--blue);
         }
+    }
+    #first {
+        margin: 0;
     }
 `;
 
@@ -27,7 +33,7 @@ export const Footer = () => {
     return (
         <FooterStyles>
             <div className="socials">
-                <a href="https://www.twitter.com/ty24henry" target="_blank"><FiTwitter /></a>
+                <a href="https://www.twitter.com/ty24henry" id="first" target="_blank"><FiTwitter /></a>
                 <a href="https://github.com/tyler24henry" target="_blank"><FiGithub /></a>
                 <a href="https://www.instagram.com/tyler24henry/" target="_blank"><FiInstagram /></a>
             </div>
