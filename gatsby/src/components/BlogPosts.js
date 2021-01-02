@@ -1,135 +1,68 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
-import { AiOutlineCalendar, AiOutlineTags } from 'react-icons/ai';
-import { IoMdArrowDropright } from 'react-icons/io';
-import { FaBookReader } from 'react-icons/fa';
-import { CommentCount } from 'gatsby-plugin-disqus';
+import Img from 'gatsby-image';
 
-import { dayMonthCommaYear } from '../utils/dateHelpers';
-
-const StyledBlogPosts = styled.div`
+export const StyledContentGrid = styled.div`
     display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 6rem;
-    .post {
+    grid-template-columns: repeat(auto-fit, minmax(25vw, 1fr));
+    grid-gap: 3rem;
+    grid-row-gap: 10rem;
+    @media(max-width: 700px){
+        grid-template-columns: repeat(auto-fit, minmax(40vw, 1fr));
+    }
+    @media(max-width: 600px){
+        grid-template-columns: 1fr;
+        grid-row-gap: 5rem;
+    }
+    .item-wrapper {
         color: var(--black);
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        grid-gap: 1.5rem;
+        .item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            filter: drop-shadow(0px 1px 1px rgba(0,0,0,0.3));
+            transition: filter 0.25s ease-in-out;
+            @media(max-width: 600px){
+                height: 250px;
+            }
+        }
+        .item-image:hover {
+            filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.3));
+        }
         .title {
             font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--black);
+            font-weight: 500;
+            color: var(--blue);
             text-decoration: none;
-            transition: all 0.3s;
+            transition: all 0.2s;
             &:hover {
                 text-decoration: underline;
-                text-decoration-color: var(--red);
             }
         }
-        .date-tags-wrapper {
-            background: var(--snow);
-            margin-top: 0.5rem;
-            padding: 0.5rem 0.4rem 0.5rem 0.2rem;
-            font-size: 1.4rem;
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 1rem;
-            align-items: center;
-            .date {
-                display: grid;
-                grid-template-columns: auto 1fr;
-                gap: 0.7rem;
-                align-items: center;
-                #icon {
-                    font-size: 1.8rem;
-                }
-            }
-            .tags {
-                font-size: 1.4rem;
-                justify-self: end;
-                display: flex;
-                align-items: center;
-                @media(max-width: 700px){
-                    position: absolute;
-                    left: -9999px;
-                    opacity: 0;
-                    display: none;
-                }
-                a {
-                    display: flex;
-                    align-items: center;
-                    font-size: 1.2rem;
-                    font-weight: 500;
-                    text-transform: uppercase;
-                    text-decoration: none;
-                    transition: all 0.3s;
-                    &:hover {
-                        text-decoration: underline;
-                        text-decoration-color: var(--red);
-                    }
-                }
-            }
-            #tag-icon {
-                font-size: 1.8rem;
-                margin-right: 0.5rem;
-            }
-        }
-        .content {
-            margin-top: 1.5rem;
+        .description {
             font-size: 1.4rem;
             line-height: 1.5;
             white-space: pre-wrap;
-        }
-        .post-footer {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 1rem;
-            align-items: center;
-            margin-top: 1.5rem;
-            background: #f5f5f5;
-            padding: 0.8rem 1rem;
-            #book {
-                font-size: 1.5rem;
-            }
-            a {
-                font-size: 1.5rem;
-            }
-            #number-comments {
-                justify-self: end;
-                font-size: 1.4rem;
-                font-weight: 500;
-            }
         }
     }
 `;
 
 export const BlogPosts = ({ blogPosts }) => {
     return (
-        <StyledBlogPosts>
+        <StyledContentGrid>
             {blogPosts.map(post => {
-                const createdAt = dayMonthCommaYear(post._createdAt);
-                let disqusConfig = {
-                    url: `https://www.tylerhenry.blog/${post.slug.current}`,
-                    identifier: post.id,
-                    title: post.title,
-                }
                 return (
-                    <div className="post" key={post.id}>
+                    <div className="item-wrapper" key={post.id}>
+                        <Link to={`/post/${post.slug.current}`}><Img className="item-image" fluid={post.image.asset.fluid} alt={post.title} /></Link>
                         <Link className="title" to={`/post/${post.slug.current}`}>{post.title}</Link>
-                        <div className="date-tags-wrapper">
-                            <div className="date">
-                                <AiOutlineCalendar id="icon" /> {createdAt}
-                            </div>
-                            <p className="tags"><AiOutlineTags id="tag-icon" /> {post.categories.map((category, index) => <Link to={`/category/${category.slug.current}`}>{index > 0 && <IoMdArrowDropright />}{category.name}</Link>)}</p>
-                        </div>
-                        <p className="content">{post.summary}</p>
-                        <div className="post-footer">
-                            <FaBookReader id="book" />
-                            <Link id="read-more" to={`/post/${post.slug.current}`}>Read more...</Link>
-                            <Link id="number-comments" to={`/post/${post.slug.current}`}><CommentCount config={disqusConfig} placeholder={'0 Comments'} /></Link>
-                        </div>
+                        <p className="description">{post.summary}</p>
                     </div>
                 )
             })}
-        </StyledBlogPosts>
+        </StyledContentGrid>
     )
 }

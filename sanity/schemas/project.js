@@ -21,16 +21,26 @@ export default {
             title: 'Description',
             type: 'text',
         },
+        {
+            name: 'image',
+            title: 'Image',
+            type: 'image',
+            options: {
+                hotspot: true,
+            }
+        },
     ],
     preview: {
         select: {
             title: 'title',
             url: 'url',
+            image: 'image',
         },
-        prepare: ({ title, url }) => {
+        prepare: ({ title, url, image }) => {
             return {
                 title,
                 subtitle: url,
+                media: image,
             }
         }
     }

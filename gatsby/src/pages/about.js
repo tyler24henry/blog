@@ -5,7 +5,7 @@ import SEO from '../components/SEO';
 export default function AboutPage() {
     return (
         <>
-            <SEO />
+            <SEO title="About - Tyler Henry" />
             <About />
         </>
     )

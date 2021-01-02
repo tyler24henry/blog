@@ -3,17 +3,33 @@ import dotenv from 'dotenv';
 dotenv.config({ path: '.env' });
 
 export default {
-    pathPrefix: '/blog',
+    pathPrefix: '/',
     siteMetadata: {
-      title: `Tyler Henry`,
-      siteUrl: 'https://www.tylerhenry.blog',
-      description: `Blog written by the great Tyler Henry.  Just kidding.  He's really, really dumb.`,
-      image: '/lightningbolt.png',
+      title: `Tyler Henry's Blog`,
+      siteUrl: 'https://www.tylerhenry.blog/',
+      description: `Tyler Henry writes essays, makes websites, and creates short videos and sketches.`,
+      image: '/favicon.png',
       twitter: '@ty24henry',
     },
     plugins: [
       'gatsby-plugin-react-helmet',
       'gatsby-plugin-styled-components',
+      `gatsby-plugin-sitemap`,
+      {
+        resolve: `gatsby-plugin-manifest`,
+        options: {
+          name: `Tyler Henry's Blog`,
+          short_name: `tyler-henry-blog`,
+          description: `Tyler Henry writes essays, makes websites, and creates short videos and sketches.`,
+          lang: `en`,
+          icon: `static/favicon.png`,
+          start_url: `/`,
+          background_color: `#ffffff`,
+          theme_color: `#5944e4`,
+          display: `standalone`,
+        },
+      },
+      `gatsby-plugin-offline`,
       {
         // this is the name of the plugin you are adding
         resolve: 'gatsby-source-sanity',
@@ -37,12 +53,6 @@ export default {
           id: 2159035,
           sv: 6,
         },
-      },
-      {
-        resolve: `gatsby-plugin-disqus`,
-        options: {
-          shortname: `tyler-henry`
-        }
       },
     ],
   };

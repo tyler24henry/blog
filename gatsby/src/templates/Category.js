@@ -43,7 +43,7 @@ export default function SingleCategoryPage({ data }) {
 }
 
 // This needs to be dynamic based on the slug passed in via context in gatsby-node.js
-export const query = graphql`
+const query = graphql`
   query($slug: String!) {
     blogPosts: allSanityPost(filter: {categories: {elemMatch: {slug: {current: {eq: $slug}}}}}) {
         nodes {

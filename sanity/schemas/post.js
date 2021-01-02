@@ -48,10 +48,23 @@ export default {
             description: 'Summary of blog post',
         },
         {
-            name: 'content',
             title: 'Content',
-            type: 'text',
-            description: 'Paste in the blog post',
+            name: 'content',
+            type: 'array',
+            of: [
+                {
+                    type: 'block',
+                },
+                {
+                    type: 'image',
+                }
+            ]
+        },
+        {
+            name: 'footnotes',
+            title: 'Footnotes',
+            type: 'array',
+            of: [{ type: 'reference', to: [{ type: 'footnote'}]}],
         },
     ],
     preview: {

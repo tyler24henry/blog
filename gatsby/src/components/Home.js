@@ -1,0 +1,142 @@
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'gatsby';
+import { BlogPosts } from './BlogPosts';
+import { Websites } from './Websites';
+
+const HomeStyles = styled.div`
+    .image-intro-wrapper {
+        min-height: calc(100vh - 20rem);
+    }
+    .image-wrapper {
+        position: relative;
+        width: calc(40vw + 1.5rem);
+        margin: 1.5rem 1.5rem 0 auto;
+        background: var(--blue);
+        @media(max-width: 1100px){
+            display: grid;
+            grid-template-columns: 1fr;
+            justify-items: center;
+            width: 100%;
+            max-width: 600px;
+            background: none;
+            margin: 0 auto;
+        }
+        .offset-image-wrapper {
+            background: var(--blue);
+        }
+        .offset-image {
+            transform: translateY(-1.5rem) translateX(1.5rem);
+            height: 30vw;
+            width: 45vw;
+            object-fit: cover;
+            object-position: 0 17.5%;
+            @media(max-width: 850px){
+                width: 60vw;
+                height: 40vw;
+            }
+            @media(max-width: 700px){
+                width: 350px;
+                height: 290px;
+            }
+        }
+    }
+    .self-intro-wrapper {
+        position: absolute;
+        right: 30vw;
+        bottom: 0;
+        padding: 3rem;
+        width: 100%;
+        z-index: 2;
+        background: white;
+        letter-spacing: 0.5px;
+        @media(max-width: 1100px){
+            position: relative;
+            right: auto;
+            bottom: auto;
+            max-width: 600px;
+            display: grid;
+            grid-template-columns: 1fr;
+            justify-items: center;
+            text-align: center;
+        }
+        h1 {
+            font-size: 5rem;
+            font-weight: 600;
+            @media(max-width: 700px){
+                font-size: 4rem;
+            }
+        }
+        h3 {
+            margin-top: 2rem;
+            font-size: 1.8rem;
+            line-height: 1.5;
+        }
+        a {
+            color: var(--blue);
+            &:hover {
+                background: var(--blue);
+                color: white;
+            }
+        }
+    }
+    .learn-more-wrapper {
+        margin-top: 2rem;
+        display: flex;
+        grid-gap: 1.5rem;
+        align-items: center;
+        p, a {
+            font-size: 1.8rem;
+            line-height: 1.5;
+        }
+        a {
+            background: var(--blue);
+            padding: 0.5rem 1rem;
+            color: white;
+            &:hover {
+                text-decoration: none;
+                background: #4512eb;
+            }
+        }
+    }
+    .essays-wrapper, .websites-wrapper {
+        margin-top: 10rem;
+        h2 {
+            text-transform: uppercase;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+    }
+`;
+
+export const Home = ({ blogPosts, projects }) => {
+    return (
+        <HomeStyles>
+            <div className="image-intro-wrapper">
+                <div className="image-wrapper">
+                    <div className="offset-image-wrapper">
+                        <img className="offset-image" src="https://res.cloudinary.com/tyler24henry/image/upload/v1607133228/myface2_g0r3dl.jpg" alt="My face" />
+                    </div>
+                    <div className="self-intro-wrapper">
+                        <h1>Hi, I'm Tyler Henry.</h1>
+                        <h3>Welcome to my corner of the internet. I <Link to="/essays">write</Link>, <Link to="/websites">make websites</Link>, and <Link to="/videos">create short videos and sketches</Link>.</h3>
+                        <div className="learn-more-wrapper">
+                            <p>Want to learn more about me?</p>
+                            <Link to="/about">Start here</Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="essays-wrapper">
+                <Link to="/essays"><h2>Essays</h2></Link>
+                <BlogPosts blogPosts={blogPosts} />
+            </div>
+            <div className="websites-wrapper">
+                <Link to="/websites"><h2>Websites</h2></Link>
+                <Websites projects={projects} />
+            </div>
+        </HomeStyles>
+    )
+}

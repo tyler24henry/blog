@@ -1,152 +1,135 @@
 import React from 'react';
 import styled from 'styled-components';
-import { graphql, Link } from 'gatsby';
-import { FacebookShareButton, TwitterShareButton, RedditShareButton, EmailShareButton, PocketShareButton } from 'react-share';
-import { FiTwitter, FiFacebook, FiMail, FiPocket } from 'react-icons/fi';
-import { ImReddit } from 'react-icons/im';
+import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
-
+import BlockContent from '@sanity/block-content-to-react';
 import SEO from '../components/SEO';
-import { dayMonthCommaYear } from '../utils/dateHelpers';
-import { AiOutlineCalendar, AiOutlineTags } from 'react-icons/ai';
-import { IoMdArrowDropright } from 'react-icons/io';
-import { Disqus } from 'gatsby-plugin-disqus';
+
+export const OffsetImageStyles = styled.div`
+    position: relative;
+    width: 95%;
+    margin: 1.5rem 1.5rem 0 auto;
+    background: var(--blue);
+    .offset-image {
+        transform: translateY(-1.25rem) translateX(1.5rem);
+        height: 400px;
+        width: 100%;
+        object-fit: cover;
+    }
+`;
 
 const StyledBlogPost = styled.div`
     .post {
         position: relative;
         color: var(--black);
-        .title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--black);
-        }
-        .date-tags-wrapper {
-            background: var(--snow);
-            margin-top: 0.5rem;
-            padding: 0.5rem 0.4rem 0.5rem 0.2rem;
-            font-size: 1.4rem;
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 1rem;
-            align-items: center;
-            .date {
-                display: grid;
-                grid-template-columns: auto 1fr;
-                gap: 0.7rem;
-                align-items: center;
-                #icon {
-                    font-size: 1.8rem;
-                }
-            }
-        }
-        .image-wrapper {
-            margin: 1rem 0 5rem 0;
-            p {
-                padding: 0.4rem 0 0 0.2rem;
-                font-size: 1.3rem;
-            }
-        }
-        .content {
-            margin-top: 1.5rem;
-            font-size: 1.4rem;
-            line-height: 1.5;
-            white-space: pre-wrap;
-        }
-        .share-post-container {
-            margin-top: 3rem;
-            padding: 0 0.3rem;
-            .border-top {
-                width: 150px;
-                height: 1px;
-                background: var(--grey);
-            }
-            p {
-                margin-top: 1.5rem;
-                font-size: 1.3rem;
-                font-weight: 500;
-                color: var(--black); 
-            }
-            .share-icons {
+        .title-category-wrapper {
+            position: absolute;
+            left: 0;
+            bottom: -35px;
+            padding: 3rem 1.5rem;
+            width: 60%;
+            z-index: 2;
+            background: white;
+            color: var(--blue);
+            h1 {
                 margin-top: 1rem;
-                display: flex;
-                gap: 0.5rem;
-                align-items: center;
-                font-size: 2rem;
-                button {
-                    box-shadow: none;
-                }
-                #twitter {
-                    font-size: 1.7rem;
-                }
-                #mail {
-                    margin: 0 0.3rem 0 0.5rem;
-                    font-size: 1.9rem;
-                }
-                #pocket {
-                    font-size: 1.9rem;
-                }
+                font-size: 3rem;
+                font-weight: 600;
+                letter-spacing: 0.5px;
             }
-        }
-        .tags {
-            font-size: 1.4rem;
-            justify-self: end;
-            display: flex;
-            align-items: center;
-            a {
-                display: flex;
-                align-items: center;
-                font-size: 1.2rem;
+            h3 {
+                font-size: 1.5rem;
                 font-weight: 500;
                 text-transform: uppercase;
-                text-decoration: none;
-                transition: all 0.3s;
+                letter-spacing: 1px;
+            }
+        }
+        .essay-wrapper {
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 7rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 3rem;
+            .content-wrapper {
+                font-size: 1.8rem;
+                line-height: 1.5;
+                white-space: pre-wrap;
+            }
+            figure {
+                margin: 6rem 0;
+                display: grid;
+                grid-template-columns: 1fr;
+                justify-items: center;
+                align-items: center;
+            }
+            a {
+                color: var(--blue);
                 &:hover {
                     text-decoration: underline;
-                    text-decoration-color: var(--red);
+                    cursor: pointer;
                 }
             }
-            span {
-                text-transform: uppercase;
-                font-size: 1.2rem;
-                font-weight: 500;
-                padding-right: 0.5rem;
+            .footnotes-wrapper {
+                padding: 7.5rem 0;
+                border-top: 2px solid gainsboro;
+                h3 {
+                    text-transform: uppercase;
+                    font-size: 2rem;
+                    font-weight: 600;
+                    letter-spacing: 2px;
+                }
+                ol {
+                    margin: 2rem 0 0 0;
+                    padding: 0 0 0 2rem;
+                }
+                li {
+                    font-size: 1.8rem;
+                    line-height: 1.5;
+                    white-space: pre-wrap;   
+                }
             }
-        }
-        #tags-header {
-            @media(max-width: 700px){
-                position: absolute;
-                left: -9999px;
-                opacity: 0;
-                display: none;
-            }
-        }
-        #tag-icon {
-            font-size: 1.8rem;
-            margin-right: 0.5rem;
-        }
-        .tags-footer {
-            background: #f5f5f5;
-            padding: 0.8rem 0.5rem;
-            margin: 1rem 0 0.5rem 0;
         }
     }
 `;
 
-// TODO
-// incorporate image
-
-export default function SingleBlogPostPage({ data }) {
+export default function SingleBlogPostPage({ data }) {   
     const blogPost = data ? data.blogPost : null;
     if(!blogPost) return <p>Blog post didn't make it 😞</p>
-    const createdAt = dayMonthCommaYear(blogPost._createdAt);
-    const url = `www.tylerhenry.blog/post/${blogPost.slug.current}`;
-    const title = `${blogPost.title} by Tyler Henry`;
 
-    let disqusConfig = {
-        url: `https://www.tylerhenry.blog/${blogPost.slug.current}`,
-        identifier: blogPost.id,
-        title: blogPost.title,
+    const category = blogPost.categories.length > 0 ? blogPost.categories[0] : '';
+
+    const BlockRenderer = props => {
+        const {style = 'normal', _key } = props.node;
+        const imageCaption = _key === "bd402428b724" || _key === "b0feb54a6d32" || _key === "3a7e6923403f" || _key === "aa1b903ee2b0" || _key === "23ceea9aa65e";
+
+        if (style === 'normal' && !imageCaption) {
+          return <p style={{ marginBottom: '4rem' }}>{props.children}</p>
+        }
+        if(imageCaption) {
+            return <p style={{ margin: '-5rem 0 4rem 0', textAlign: 'center', fontWeight: '600' }}>{props.children}</p>
+        }
+        
+        // Fall back to default handling
+        return BlockContent.defaultSerializers.types.block(props)
+    }
+
+    const serializers = {
+        types: {
+          footnote: props => {
+              const content = props.node.content.map(item => item.children.map(child => child.text));
+              return (
+                (
+                    <li>
+                      {content.map((item, index) => (
+                          <span style={{ marginTop: index > 0 && '3rem', display: 'block'}}>{item}</span>
+                      ))}
+                    </li>
+                  )
+              )
+          }
+        }
     }
 
   return (
@@ -154,63 +137,26 @@ export default function SingleBlogPostPage({ data }) {
         <SEO title={blogPost.title} image={blogPost.image?.asset?.fluid?.src} />
         <StyledBlogPost>
             <div className="post">
-                <div className="title">{blogPost.title}</div>
-                <div className="date-tags-wrapper">
-                    <div className="date">
-                        <AiOutlineCalendar id="icon" /> {createdAt}
+                <OffsetImageStyles>
+                    <Img className="offset-image" fluid={blogPost.image.asset.fluid} alt={blogPost.title} />
+                    <div className="title-category-wrapper">
+                        <h3>{category.name}</h3>
+                        <h1>{blogPost.title}</h1>
                     </div>
-                    <p className="tags" id="tags-header"><AiOutlineTags id="tag-icon" /> {blogPost.categories.map((category, index) => <Link to={`/category/${category.slug.current}`}>{index > 0 && <IoMdArrowDropright />}{category.name}</Link>)}</p>
-                </div>
-                <div className="image-wrapper">
-                    <Img fluid={blogPost.image.asset.fluid} alt={blogPost.title} />
-                    <p>{blogPost.imageSubtitle}</p>
-                </div>
-                <p className="content">{blogPost.content}</p>
-                <div className="share-post-container">
-                    <div className="border-top"></div>
-                    <p>Share</p>
-                    <div className="share-icons">
-                        <TwitterShareButton
-                            url={url}
-                            title={title}
-                            className="share-button"
-                        >
-                            <FiTwitter id="twitter" />
-                        </TwitterShareButton>
-                        <FacebookShareButton
-                            url={url}
-                            title={title}
-                            className="share-button"
-                        >
-                            <FiFacebook />
-                        </FacebookShareButton>
-                        <RedditShareButton
-                            url={url}
-                            title={title}
-                            className="share-button"
-                        >
-                            <ImReddit />
-                        </RedditShareButton>
-                        <EmailShareButton
-                            url={url}
-                            title={title}
-                            className="share-button"
-                        >
-                            <FiMail id="mail" />
-                        </EmailShareButton>
-                        <PocketShareButton
-                            url={url}
-                            title={title}
-                            className="share-button"
-                        >
-                            <FiPocket id="pocket" />
-                        </PocketShareButton>
+                </OffsetImageStyles>
+                <div className="essay-wrapper">
+                    <div className="content-wrapper">
+                        <BlockContent blocks={blogPost._rawContent} serializers={{ types: {block: BlockRenderer}}} />
                     </div>
+                    {blogPost._rawFootnotes && blogPost._rawFootnotes.length > 0 && (
+                        <div className="footnotes-wrapper">
+                            <h3>Footnotes</h3>
+                            <ol>
+                                <BlockContent blocks={blogPost._rawFootnotes} serializers={serializers} />
+                            </ol>
+                        </div>
+                    )}
                 </div>
-                <div className="tags-footer">
-                    <p id="tags-footer" className="tags"><span>Tags</span> <AiOutlineTags id="tag-icon" /> {blogPost.categories.map((category, index) => <Link to={`/category/${category.slug.current}`}>{index > 0 && <IoMdArrowDropright />}{category.name}</Link>)}</p>
-                </div>
-                <Disqus config={disqusConfig} />
             </div>
         </StyledBlogPost>
     </>
@@ -227,7 +173,8 @@ export const query = graphql`
           current
       }
       summary
-      content
+      _rawContent(resolveReferences: {maxDepth: 10})
+      _rawFootnotes(resolveReferences: {maxDepth: 10})
       _createdAt
       image {
         asset {

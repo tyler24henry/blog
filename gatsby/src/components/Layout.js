@@ -4,36 +4,31 @@ import { Footer } from './Footer';
 import styled from 'styled-components';
 import GlobalStyles from '../styles/GlobalStyles';
 import Typography from '../styles/Typography';
-import { RightNav } from './RightNav';
 import { TopNav } from './TopNav';
 
 const SiteBorderStyles = styled.div`
-  max-width: 95vw;
+
 `;
 
 const ContentStyles = styled.div`
-  width: 80vw;
-  margin: 0 auto;
   min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  gap: 4rem;
+  grid-gap: 6rem;
   a {
     text-decoration: none;
-    transition: all 0.4s;
+    transition: all 0.2s;
     &:hover {
-        text-decoration: underline;
-        text-decoration-color: var(--red);
+        color: var(--blue);
     }
   }
 `;
 
 const BodyStyles = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 250px;
-  grid-gap: 4rem;
-  @media(max-width: 1000px){
-      grid-template-columns: 1fr;
+  width: 80vw;
+  margin: 0 auto;
+  @media(max-width: 700px){
+    width: 90vw;
   }
 `;
 
@@ -47,7 +42,6 @@ export default function Layout({ children }) {
         <TopNav />
         <BodyStyles>
           {children}
-          <RightNav />
         </BodyStyles>
         <Footer />
       </ContentStyles>
