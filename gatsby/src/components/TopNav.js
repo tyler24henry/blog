@@ -121,7 +121,7 @@ export const TopNav = () => {
                 <div className="dropdown-outer-wrapper">
                     <div className="dropdown-inner-wrapper">
                         <div className="header-grid">
-                            <Link id="name" to="/">Tyler Henry</Link>
+                            <Link id="name" onClick={e => setDropdown(false)} to="/">Tyler Henry</Link>
                             <button type="button" onClick={e => setDropdown(false)} className="exit-btn"><BiX /></button>
                         </div>
                         <Link to="/essays" id="first-link" onClick={e => setDropdown(false)} className={currentUrl === 'essays' ? 'current-page' : ''}>Essays</Link>

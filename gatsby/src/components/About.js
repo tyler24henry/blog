@@ -106,7 +106,7 @@ export const About = () => {
                 </div>
             </div>
             <div className="about-wrapper">
-                <p className="item">Each week, my goal is to write at least one essay. Topics that I like to explore include comedy, movies, human superpowers, personality, and life as an introvert.</p>
+                <p className="item">Each week, my goal is to write at least one essay. Topics that I like to explore include comedy, movies, personality, and life as an introvert.</p>
                 <p className="item">I am always working on a new website. I recently finished making a tribute site for <a href="https://harriswittels.wiki/" target="_blank">Harris Wittels</a>, my favorite comedian.</p>
                 <p className="item">Comedy is the thing I love most in life, and I sometimes try to produce content myself in the form of short videos and sketches.</p>
                 <p className="item">If you want to find me, I'm on <a href="https://twitter.com/Ty24Henry" target="_blank">Twitter</a> or if you prefer email, send me a message at  <a href="mailto:tyler.henry2442@gmail.com" target="_blank">tyler.henry2442@gmail.com</a>.</p>

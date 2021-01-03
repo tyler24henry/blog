@@ -51,9 +51,7 @@ export const StyledContentGrid = styled.div`
             font-size: 1.4rem;
             line-height: 1.5;
             white-space: pre-wrap;
-            @media(max-width: 414px){
-                margin-top: -1rem;
-            }
+            margin-top: -1rem;
         }
     }
 `;

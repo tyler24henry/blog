@@ -125,12 +125,13 @@ const StyledBlogPost = styled.div`
 export default function SingleBlogPostPage({ data }) {   
     const blogPost = data ? data.blogPost : null;
     if(!blogPost) return <p>Blog post didn't make it 😞</p>
+    console.log(blogPost);
 
     const category = blogPost.categories.length > 0 ? blogPost.categories[0] : '';
 
     const BlockRenderer = props => {
         const {style = 'normal', _key } = props.node;
-        const imageCaption = _key === "bd402428b724" || _key === "b0feb54a6d32" || _key === "3a7e6923403f" || _key === "aa1b903ee2b0" || _key === "23ceea9aa65e";
+        const imageCaption = _key === "bd402428b724" || _key === "fdac6837bea4" || _key === "b0feb54a6d32" || _key === "3a7e6923403f" || _key === "aa1b903ee2b0" || _key === "23ceea9aa65e" || _key === "c051f64f9d24" || _key === "95d9dd75fd08";
 
         if (style === 'normal' && !imageCaption) {
           return <p style={{ marginBottom: '4rem' }}>{props.children}</p>
