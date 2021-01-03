@@ -85,13 +85,6 @@ const StyledBlogPost = styled.div`
                 line-height: 1.5;
                 white-space: pre-wrap;
             }
-            figure {
-                margin: 6rem 0;
-                display: grid;
-                grid-template-columns: 1fr;
-                justify-items: center;
-                align-items: center;
-            }
             a {
                 color: var(--blue);
                 &:hover {
@@ -99,23 +92,90 @@ const StyledBlogPost = styled.div`
                     cursor: pointer;
                 }
             }
+            .p, .h2, .h3, .blockquote, .image-wrapper {
+                margin-bottom: 4rem;
+            }
+            .h2, .h3 {
+                margin-top: 7.5rem;
+                padding-top: 7.5rem;
+                border-top: 2px solid gainsboro;
+            }
+            .h2 {
+                letter-spacing: 0.5px;
+                font-size: 2.8rem;
+                font-weight: 700;
+                letter-spacing: 0.5px;
+
+            }
+            .h3 {
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                font-size: 2.2rem;
+                font-weight: 600;
+            }
+            .blockquote {
+                padding: 0.5rem 2.5rem 0.5rem 1.5rem;
+                margin-left: 2.5rem;
+                border-left: 4px solid var(--blue);
+            }
+            .image-caption {
+                margin: -3rem 0 5rem 0;
+                text-align: center;
+                font-weight: 600;
+            }
+            .image-wrapper {
+                display: grid;
+                grid-template-columns: 1fr;
+                align-items: center;
+                justify-items: center;
+                img {
+                    width: 100%;
+                }
+            }
             .footnotes-wrapper {
                 padding: 7.5rem 0;
                 border-top: 2px solid gainsboro;
-                h3 {
+                .footnotes-header {
                     text-transform: uppercase;
                     font-size: 2rem;
                     font-weight: 600;
                     letter-spacing: 2px;
+                    padding-bottom: 1rem;
                 }
                 ol {
-                    margin: 2rem 0 0 0;
-                    padding: 0 0 0 2rem;
+                    margin: 0;
+                    padding: 0 0 0 1.25rem;
+                    list-style: none;
+                    counter-reset: footnotes-counter;
                 }
-                li {
+                ol li {
+                    counter-increment: footnotes-counter;
+                    position: relative;
+                }
+                ol li::before {
+                    content: counter(footnotes-counter);
+                    color: var(--black);
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    position: absolute;
+                    --size: 20px;
+                    left: calc(-1 * var(--size));
+                    line-height: var(--size);
+                    width: var(--size);
+                    height: var(--size);
+                    top: 0;
+                    transform: translateY(-2px);
+                    text-align: center;
+                }
+                .footnote-li {
+                    margin-top: 2rem;
                     font-size: 1.8rem;
                     line-height: 1.5;
-                    white-space: pre-wrap;   
+                    span {
+                        display: block;
+                        white-space: pre-wrap;  
+                        margin-top: 1rem;
+                    }
                 }
             }
         }
@@ -125,39 +185,57 @@ const StyledBlogPost = styled.div`
 export default function SingleBlogPostPage({ data }) {   
     const blogPost = data ? data.blogPost : null;
     if(!blogPost) return <p>Blog post didn't make it 😞</p>
-    console.log(blogPost);
+    const postContent = blogPost._rawContent.filter(item => item._type !== "footnote");
+    const postFootnotes = blogPost._rawContent.filter(item => item._type === "footnote");
 
     const category = blogPost.categories.length > 0 ? blogPost.categories[0] : '';
 
-    const BlockRenderer = props => {
-        const {style = 'normal', _key } = props.node;
-        const imageCaption = _key === "bd402428b724" || _key === "fdac6837bea4" || _key === "b0feb54a6d32" || _key === "3a7e6923403f" || _key === "aa1b903ee2b0" || _key === "23ceea9aa65e" || _key === "c051f64f9d24" || _key === "95d9dd75fd08";
-
-        if (style === 'normal' && !imageCaption) {
-          return <p style={{ marginBottom: '4rem' }}>{props.children}</p>
-        }
-        if(imageCaption) {
-            return <p style={{ margin: '-5rem 0 4rem 0', textAlign: 'center', fontWeight: '600' }}>{props.children}</p>
-        }
-        
-        // Fall back to default handling
-        return BlockContent.defaultSerializers.types.block(props)
-    }
-
     const serializers = {
         types: {
-          footnote: props => {
-              const content = props.node.content.map(item => item.children.map(child => child.text));
-              return (
-                (
-                    <li>
-                      {content.map((item, index) => (
-                          <span style={{ marginTop: index > 0 && '3rem', display: 'block'}}>{item}</span>
-                      ))}
-                    </li>
-                  )
-              )
-          }
+            block: props => {
+                const {style = 'normal' } = props.node;
+                let imageCaption = style === 'imageCaption' && props.node;
+                if(imageCaption){
+                    imageCaption = { _key: imageCaption._key, text: imageCaption.children.map(child => child.text).join(''), href: imageCaption.markDefs[0]?.href }
+                }
+
+                console.log(props.children);
+
+                if (style === 'normal' && !imageCaption) {
+                  return <p className="p">{props.children}</p>
+                }
+                if (style === 'h2' && !imageCaption) {
+                    return <h2 className="h2">{props.children}</h2>
+                }
+                if (style === 'h3' && !imageCaption) {
+                    return <h3 className="h3">{props.children}</h3>
+                }
+                if (style === 'blockquote' && !imageCaption) {
+                    return <p className="blockquote">{props.children}</p>
+                }
+                if(imageCaption && imageCaption.href) {
+                    return <p className="image-caption"><a target="_blank" href={imageCaption.href}>{imageCaption.text}</a></p>
+                } else {
+                    return <p className="image-caption">{imageCaption.text}</p>
+                }
+                
+            },
+            image: props => {
+                const image = props.node.asset;
+                return <div className="image-wrapper"><img src={image.url} alt={image.originalFilename} /></div>
+            },
+            footnote: props => {
+                const children = props.node.content.map(item => item.children.map(child => child.text));
+                return (
+                    (
+                        <li className="footnote-li">
+                            {children.map(item => (
+                                <span>{item}</span>
+                            ))}
+                        </li>
+                    )
+                )
+            }
         }
     }
 
@@ -177,13 +255,13 @@ export default function SingleBlogPostPage({ data }) {
                 </OffsetImageStyles>
                 <div className="essay-wrapper">
                     <div className="content-wrapper">
-                        <BlockContent blocks={blogPost._rawContent} serializers={{ types: {block: BlockRenderer}}} />
+                        <BlockContent blocks={postContent} serializers={serializers} />
                     </div>
-                    {blogPost._rawFootnotes && blogPost._rawFootnotes.length > 0 && (
+                    {postFootnotes.length > 0 && (
                         <div className="footnotes-wrapper">
-                            <h3>Footnotes</h3>
+                            <h2 className="footnotes-header">Footnotes</h2>
                             <ol>
-                                <BlockContent blocks={blogPost._rawFootnotes} serializers={serializers} />
+                                <BlockContent blocks={postFootnotes} serializers={serializers} />
                             </ol>
                         </div>
                     )}
@@ -205,7 +283,6 @@ export const query = graphql`
       }
       summary
       _rawContent(resolveReferences: {maxDepth: 10})
-      _rawFootnotes(resolveReferences: {maxDepth: 10})
       _createdAt
       image {
         asset {

@@ -25,7 +25,6 @@ export const query = graphql`
                 }
                 summary
                 _rawContent(resolveReferences: {maxDepth: 10})
-                _rawFootnotes(resolveReferences: {maxDepth: 10})
                 _createdAt
                 image {
                     asset {
