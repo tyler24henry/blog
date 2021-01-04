@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'gatsby';
 import { BlogPosts } from './BlogPosts';
 import { Websites } from './Websites';
+import Img from 'gatsby-image';
 
 const HomeStyles = styled.div`
     @media(max-width: 414px){
@@ -42,7 +43,6 @@ const HomeStyles = styled.div`
             height: 30vw;
             width: 45vw;
             object-fit: cover;
-            object-position: 0 17.5%;
             @media(max-width: 850px){
                 width: 60vw;
                 height: 40vw;
@@ -137,13 +137,13 @@ const HomeStyles = styled.div`
     }
 `;
 
-export const Home = ({ blogPosts, projects }) => {
+export const Home = ({ blogPosts, projects, myFace }) => {
     return (
         <HomeStyles>
             <div className="image-intro-wrapper">
                 <div className="image-wrapper">
                     <div className="offset-image-wrapper">
-                        <img className="offset-image" src="https://res.cloudinary.com/tyler24henry/image/upload/v1607133228/myface2_g0r3dl.jpg" alt="My face" />
+                        <Img className="offset-image" imgStyle={{ objectPosition: '0 17.5%'}} fluid={myFace.image.asset.fluid} alt="My face" />
                     </div>
                     <div className="self-intro-wrapper">
                         <h1>Hi, I'm Tyler Henry.</h1>

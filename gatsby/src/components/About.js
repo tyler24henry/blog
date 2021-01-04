@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
+import Img from 'gatsby-image';
 
 const StyledAbout = styled.div`
     @media(max-width: 414px){
@@ -93,7 +94,7 @@ const StyledAbout = styled.div`
     }
 `;
 
-export const About = () => {
+export const About = ({ myFace }) => {
     return (
         <StyledAbout>
             <div className="image-intro-wrapper">
@@ -102,7 +103,7 @@ export const About = () => {
                     <h3>I <Link to="/essays">write</Link>, <Link to="/websites">make websites</Link>, and <Link to="/videos">create short videos and sketches</Link>.</h3>
                 </div>
                 <div className="image-wrapper">
-                    <img className="offset-image" src="https://res.cloudinary.com/tyler24henry/image/upload/v1607133228/myface2_g0r3dl.jpg" alt="My face" />
+                    <Img className="offset-image" fluid={myFace.image.asset.fluid} alt="My face" />
                 </div>
             </div>
             <div className="about-wrapper">

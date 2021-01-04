@@ -199,8 +199,6 @@ export default function SingleBlogPostPage({ data }) {
                     imageCaption = { _key: imageCaption._key, text: imageCaption.children.map(child => child.text).join(''), href: imageCaption.markDefs[0]?.href }
                 }
 
-                console.log(props.children);
-
                 if (style === 'normal' && !imageCaption) {
                   return <p className="p">{props.children}</p>
                 }
@@ -221,8 +219,9 @@ export default function SingleBlogPostPage({ data }) {
                 
             },
             image: props => {
-                const image = props.node.asset;
-                return <div className="image-wrapper"><img src={image.url} alt={image.originalFilename} /></div>
+                const image = props.node;
+                console.log(image);
+                return <div className="image-wrapper"><img src={image.asset.url} alt={image.alt} /></div>
             },
             footnote: props => {
                 const children = props.node.content.map(item => item.children.map(child => child.text));

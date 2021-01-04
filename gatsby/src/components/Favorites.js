@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { OffsetImageStyles } from '../templates/BlogPost';
+import Img from 'gatsby-image';
 
 const StyledFavorites = styled.div`
     @media(max-width: 414px){
@@ -83,12 +84,12 @@ const StyledFavorites = styled.div`
     }
 `;
 
-export const Favorites = () => {
+export const Favorites = ({ favoriteThings }) => {
     return (
         <StyledFavorites>
             <div className="image-intro-wrapper">
                 <OffsetImageStyles>
-                    <img className="offset-image" src="https://res.cloudinary.com/tyler24henry/image/upload/v1609459049/my-favorite-things_rrlxgj.jpg" alt="Scene from The Sound of Music" />
+                    <Img className="offset-image" fluid={favoriteThings.image.asset.fluid} alt={favoriteThings.name} />
                 </OffsetImageStyles>
                 <p id="quote">"I simply remember my favorite things and then I don't feel so bad" - Julie Andrews in <i>The Sound Of Music</i></p>
             </div>

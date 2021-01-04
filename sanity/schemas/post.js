@@ -1,5 +1,6 @@
 import { MdKeyboardHide as icon } from 'react-icons/md';
 import { FaExternalLinkAlt } from 'react-icons/fa';
+import {isUniqueAcrossAllDocuments} from '../utils/isUniqueAcrossAllDocuments';
 
 export default {
     name: 'post',
@@ -20,6 +21,7 @@ export default {
             options: {
                 source: 'title',
                 maxLength: 100,
+                isUnique: isUniqueAcrossAllDocuments,
             },
         },
         {
@@ -34,7 +36,7 @@ export default {
             type: 'image',
             options: {
                 hotspot: true,
-            }
+            },
         },
         {
             name: 'imageSubtitle',

@@ -8,11 +8,12 @@ import post from './post';
 import footnote from './footnote';
 import category from './category';
 import project from './project';
+import siteImage from './siteImage';
 
 export default createSchema({
   // We name our schema
   name: 'default',
   // Then proceed to concatenate our document type
   // to the ones provided by any plugins that are installed
-  types: schemaTypes.concat([post, footnote, category, project]),
+  types: schemaTypes.concat([post, footnote, category, project, siteImage]),
 });
